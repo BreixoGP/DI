@@ -36,7 +36,7 @@ def salir():
 root = tk.Tk()
 root.title("Ejercicio12")
 root.geometry("500x600")
-root.resizable(False, False)
+
 
 
 # Menú
