@@ -33,7 +33,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTitle"
-        app:shapeAppearanceOverlay="@style/CircularShape" />
+        app:shapeAppearanceOverlay="@style/CircularShape"
+        app:strokeColor="@color/black"
+        app:strokeWidth="3dp"/>
 
     <!-- Descripción -->
     <TextView
