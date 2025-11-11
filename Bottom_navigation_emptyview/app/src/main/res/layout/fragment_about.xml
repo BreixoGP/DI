@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".aboutFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="hay veces que me pregunto
+Pero no sé contestarme
+Lo que hacemos en la vida
+Luego de nada nos vale
+Todo es una mentira
+Todo se lo lleva el aire
+Hay veces que me pregunto
+Pero no sé contestarme" />
+
+</FrameLayout>
