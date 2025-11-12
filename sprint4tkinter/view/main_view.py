@@ -15,3 +15,5 @@ scrollable.grid(row=0, column=0, sticky="nswe", padx=10, pady=10)
 panel = ctk.CTkFrame(app, corner_radius=10)
 panel.grid(row=0, column=1, sticky="nswe", padx=10, pady=10)
 
+#botones
+
