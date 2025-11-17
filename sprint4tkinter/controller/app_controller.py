@@ -1,25 +1,20 @@
 import customtkinter as ctk
-from view.main_view import app, scrollable, panel
 
-class Controller:
-    def __init__(self, app, scrollable, panel):
-        self.app = app
-        self.scrollable = scrollable
-        self.panel = panel
-        self.usuarios = []
+from model.GestorUsuarios import GestorUsuarios
+from view.main_view import MainView
 
-    def listar_usuarios(self):
-        # agrega botones dinámicos para cada usuario
-        for i in self.usuarios:
-            boton = ctk.CTkButton(self.scrollable, text=i, command=lambda i=i: self.seleccionar(i))
-            boton.pack(padx=10, pady=5, fill="x")
 
-    def seleccionar(self, usuario):
-        # limpia panel y muestra usuario seleccionado
-        for w in self.panel.winfo_children():
-            w.destroy()
-        label = ctk.CTkLabel(self.panel, text=f"Seleccionado: {usuario}")
-        label.pack(padx=20, pady=20)
+class AppController:
+    def __init__(self,root):
+        self.root=root
+        self.model = GestorUsuarios()
+        self.view = MainView(root)
+        self.refrescar_lista_usuarios()
 
-    def salir(self):
-        self.app.destroy()
+    def refrescar_lista_usuarios(self):
+        usuarios = self.model.listar()
+        self.view.actualizar_lista_usuarios(usuarios,self.seleccionar_usuario)
+
+    def seleccionar_usuario(self, indice):
+        usuario_seleccionado = self.model.listar()[indice]
+        self.view.mostrar_detalles_usuario(usuario_seleccionado)
