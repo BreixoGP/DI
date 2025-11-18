@@ -51,3 +51,23 @@ class MainView(ctk.CTkFrame):
         self.label_edad.configure(text=f"Edad: {usuario.edad}")
         self.label_genero.configure(text=f"Género: {usuario.genero}")
         self.label_avatar.configure(text=f"Avatar: {usuario.avatar}")
+
+
+class AddUserView:
+    def __init__(self, master):
+        self.window = ctk.CTkToplevel(master)
+        self.window.title("Añadir Nuevo Usuario")
+        self.window.geometry("300x350")
+        self.window.grab_set()  # ¡Esto la hace modal!
+
+        # --- Aquí dentro, crea todos tus widgets y añádelos a self.window ---
+        self.nombre_entry = ctk.CTkEntry(self.window)
+        self.nombre_entry.pack(pady=10, padx=10)
+        self.guardar_button = ctk.CTkButton(self.window, text="Guardar")
+        self.guardar_button.pack(pady=10, padx=10)
+    def get_data(self):
+        """Recoge los valores del formulario y los devuelve en un diccionario"""
+        datos = {
+            "nombre": self.nombre_entry.get()
+        }
+        return datos
