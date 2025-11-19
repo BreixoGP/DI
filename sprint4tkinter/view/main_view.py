@@ -38,7 +38,7 @@ class MainView(ctk.CTkFrame):
         self.label_avatar.pack(anchor="w", pady=5)
 
         # botones abajo
-        self.boton_añadir_usuario = ctk.CTkButton(self, text="Añadir Usuario")
+        self.boton_añadir_usuario = ctk.CTkButton(self, text="Añadir Usuario",)
         self.boton_añadir_usuario.grid(row=1, column=0, sticky="w", padx=10, pady=10)
 
         self.boton_salir = ctk.CTkButton(self, text="Salir")
@@ -68,12 +68,17 @@ class AddUserView:
     def __init__(self, master):
         self.window = ctk.CTkToplevel(master)
         self.window.title("Añadir Nuevo Usuario")
-        self.window.geometry("300x350")
-        self.window.grab_set()  # ¡Esto la hace modal!
+        self.window.geometry("500x650")
+        self.window.grab_set()  #Esto la hace modal
 
         # Entradas
+        label = ctk.CTkLabel(self.window, text="Nombre:")
+        label.pack(pady=10)
         self.nombre_entry = ctk.CTkEntry(self.window)
         self.nombre_entry.pack(pady=10, padx=10)
+
+        label = ctk.CTkLabel(self.window, text="Edad:")
+        label.pack(pady=10)
 
         self.edad_entry = ctk.CTkEntry(self.window)
         self.edad_entry.pack(pady=10, padx=10)
@@ -85,17 +90,17 @@ class AddUserView:
         label.pack(pady=10)
 
         rb_masculino = ctk.CTkRadioButton(
-            self.window, text="Masculino", variable=self.genero_var, value="masculino"
+            self.window, text="Masculino", variable=self.genero_var, value="M"
         )
         rb_masculino.pack(pady=5)
 
         rb_femenino = ctk.CTkRadioButton(
-            self.window, text="Femenino", variable=self.genero_var, value="femenino"
+            self.window, text="Femenino", variable=self.genero_var, value="F"
         )
         rb_femenino.pack(pady=5)
 
         rb_otro = ctk.CTkRadioButton(
-            self.window, text="Otro", variable=self.genero_var, value="otro"
+            self.window, text="Otro", variable=self.genero_var, value="O"
         )
         rb_otro.pack(pady=5)
 

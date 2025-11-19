@@ -13,6 +13,7 @@ class AppController:
         self.model = GestorUsuarios()
         self.view = MainView(root)
         self.refrescar_lista_usuarios()
+        self.view.boton_añadir_usuario.configure(command=self.abrir_ventana_añadir)
         self.BASE_DIR = Path(__file__).resolve().parent.parent
         self.ASSETS_PATH = self.BASE_DIR / "assets"
     def refrescar_lista_usuarios(self):
