@@ -63,8 +63,47 @@ class AddUserView:
         # --- Aquí dentro, crea todos tus widgets y añádelos a self.window ---
         self.nombre_entry = ctk.CTkEntry(self.window)
         self.nombre_entry.pack(pady=10, padx=10)
+        self.edad_entry = ctk.CTkEntry(self.window)
+        self.edad_entry.pack(pady=10, padx=10)
+
+        # Radio buttons
+        label = ctk.CTkLabel(self.window, text="Género:")
+        label.pack(pady=10)
+
+        rb_masculino = ctk.CTkRadioButton(
+            self.window, text="Masculino", value="masculino"
+        )
+        rb_masculino.pack(pady=5)
+
+        rb_femenino = ctk.CTkRadioButton(
+            self.window, text="Femenino",value="femenino"
+        )
+        rb_femenino.pack(pady=5)
+
+        rb_otro = ctk.CTkRadioButton(
+            self.window, text="Otro", value="otro"
+        )
+        rb_otro.pack(pady=5)
+        avatar1 = ctk.CTkRadioButton(
+            self.window, text="Avatar1", value="masculino"
+        )
+        label = ctk.CTkLabel(self.window, text="Avatar:")
+        label.pack(pady=10)
+        avatar1.pack(pady=5)
+
+        avatar2 = ctk.CTkRadioButton(
+            self.window, text="Avatar2", value="femenino"
+        )
+        avatar2.pack(pady=5)
+
+        avatar3 = ctk.CTkRadioButton(
+            self.window, text="Avatar3", value="otro"
+        )
+        avatar3.pack(pady=5)
         self.guardar_button = ctk.CTkButton(self.window, text="Guardar")
         self.guardar_button.pack(pady=10)
+        self.cancelar_button = ctk.CTkButton(self.window, text="Cancelar")
+        self.cancelar_button.pack(pady=10)
     def get_data(self):
         """Recoge los valores del formulario y los devuelve en un diccionario"""
         datos = {
