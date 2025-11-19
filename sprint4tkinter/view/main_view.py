@@ -1,3 +1,5 @@
+import tkinter
+
 import customtkinter as ctk
 from PIL import Image
 from customtkinter import CTkImage
@@ -9,6 +11,12 @@ class MainView(ctk.CTkFrame):
         self.grid(sticky="nsew")
         # expandirse y ocupar todo el root
         self.pack(expand=True, fill="both")
+        #barramenu
+        self.menubar = tkinter.Menu(master)
+        master.config(menu=self.menubar)
+        self.menu_archivo = tkinter.Menu(self.menubar, tearoff=0)
+        self.menubar.add_cascade(label="Archivo", menu=self.menu_archivo)
+
         # Grid
         self.grid_columnconfigure(0, weight=1)
         self.grid_columnconfigure(1, weight=3)
