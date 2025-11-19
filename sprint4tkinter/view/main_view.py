@@ -1,26 +1,30 @@
 import customtkinter as ctk
 
+
 class MainView(ctk.CTkFrame):
 
-    def __init__(self,master):
+    def __init__(self, master):
         super().__init__(master)
         self.grid(sticky="nsew")
-        #expandirse y ocupar todo el root
+        # expandirse y ocupar todo el root
         self.pack(expand=True, fill="both")
-        #Grid
+        # Grid
         self.grid_columnconfigure(0, weight=1)
         self.grid_columnconfigure(1, weight=3)
         self.grid_rowconfigure(0, weight=1)
 
-        #lista de usuarios
+        # NUEVA FILA PARA BOTONES (respeta todo lo demás)
+        self.grid_rowconfigure(1, weight=0)
+
+        # lista de usuarios
         self.lista_usuarios_scrollable = ctk.CTkScrollableFrame(self)
         self.lista_usuarios_scrollable.grid(row=0, column=0, sticky="nsew", padx=10, pady=10)
 
-        #detalle usuario
+        # detalle usuario
         self.frame = ctk.CTkFrame(self)
         self.frame.grid(row=0, column=1, sticky="nsew", padx=10, pady=10)
 
-        #labels
+        # labels
         self.label_nombre = ctk.CTkLabel(self.frame, text="Nombre: ")
         self.label_nombre.pack(anchor="w", pady=5)
 
@@ -32,6 +36,13 @@ class MainView(ctk.CTkFrame):
 
         self.label_avatar = ctk.CTkLabel(self.frame, text="Avatar: ")
         self.label_avatar.pack(anchor="w", pady=5)
+
+        # botones abajo
+        self.boton_añadir_usuario = ctk.CTkButton(self, text="Añadir Usuario")
+        self.boton_añadir_usuario.grid(row=1, column=0, sticky="w", padx=10, pady=10)
+
+        self.boton_salir = ctk.CTkButton(self, text="Salir")
+        self.boton_salir.grid(row=1, column=1, sticky="e", padx=10, pady=10)
 
     def actualizar_lista_usuarios(self, usuarios, on_seleccionar_callback):
         for widget in self.lista_usuarios_scrollable.winfo_children():
@@ -60,53 +71,68 @@ class AddUserView:
         self.window.geometry("300x350")
         self.window.grab_set()  # ¡Esto la hace modal!
 
-        # --- Aquí dentro, crea todos tus widgets y añádelos a self.window ---
+        # Entradas
         self.nombre_entry = ctk.CTkEntry(self.window)
         self.nombre_entry.pack(pady=10, padx=10)
+
         self.edad_entry = ctk.CTkEntry(self.window)
         self.edad_entry.pack(pady=10, padx=10)
 
-        # Radio buttons
+        # GÉNERO
+        self.genero_var = ctk.StringVar(value="ninguno")
+
         label = ctk.CTkLabel(self.window, text="Género:")
         label.pack(pady=10)
 
         rb_masculino = ctk.CTkRadioButton(
-            self.window, text="Masculino", value="masculino"
+            self.window, text="Masculino", variable=self.genero_var, value="masculino"
         )
         rb_masculino.pack(pady=5)
 
         rb_femenino = ctk.CTkRadioButton(
-            self.window, text="Femenino",value="femenino"
+            self.window, text="Femenino", variable=self.genero_var, value="femenino"
         )
         rb_femenino.pack(pady=5)
 
         rb_otro = ctk.CTkRadioButton(
-            self.window, text="Otro", value="otro"
+            self.window, text="Otro", variable=self.genero_var, value="otro"
         )
         rb_otro.pack(pady=5)
-        avatar1 = ctk.CTkRadioButton(
-            self.window, text="Avatar1", value="masculino"
-        )
+
+        # AVATAR
+        self.avatar_var = ctk.StringVar(value="ninguno")
+
         label = ctk.CTkLabel(self.window, text="Avatar:")
         label.pack(pady=10)
+
+        avatar1 = ctk.CTkRadioButton(
+            self.window, text="Avatar1", variable=self.avatar_var, value="avatar1"
+        )
         avatar1.pack(pady=5)
 
         avatar2 = ctk.CTkRadioButton(
-            self.window, text="Avatar2", value="femenino"
+            self.window, text="Avatar2", variable=self.avatar_var, value="avatar2"
         )
         avatar2.pack(pady=5)
 
         avatar3 = ctk.CTkRadioButton(
-            self.window, text="Avatar3", value="otro"
+            self.window, text="Avatar3", variable=self.avatar_var, value="avatar3"
         )
         avatar3.pack(pady=5)
+
+        # Botones
         self.guardar_button = ctk.CTkButton(self.window, text="Guardar")
         self.guardar_button.pack(pady=10)
+
         self.cancelar_button = ctk.CTkButton(self.window, text="Cancelar")
         self.cancelar_button.pack(pady=10)
+
     def get_data(self):
         """Recoge los valores del formulario y los devuelve en un diccionario"""
         datos = {
-            "nombre": self.nombre_entry.get()
+            "nombre": self.nombre_entry.get(),
+            "edad": self.edad_entry.get(),
+            "genero": self.genero_var.get(),
+            "avatar": self.avatar_var.get(),
         }
         return datos
