@@ -17,3 +17,6 @@ class GestorUsuarios:
 
     def listar(self):
         return self._usuarios
+
+    def agregar(self, usuario: Usuario):
+        self._usuarios.append(usuario)

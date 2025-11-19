@@ -106,17 +106,17 @@ class AddUserView:
         label.pack(pady=10)
 
         avatar1 = ctk.CTkRadioButton(
-            self.window, text="Avatar1", variable=self.avatar_var, value="avatar1"
+            self.window, text="Avatar1", variable=self.avatar_var, value="C:\\Users\\Breixo\\manual-git\\sprint4tkinter\\assets\\avatar1.png"
         )
         avatar1.pack(pady=5)
 
         avatar2 = ctk.CTkRadioButton(
-            self.window, text="Avatar2", variable=self.avatar_var, value="avatar2"
+            self.window, text="Avatar2", variable=self.avatar_var, value="C:\\Users\\Breixo\\manual-git\\sprint4tkinter\\assets\\avatar2.png"
         )
         avatar2.pack(pady=5)
 
         avatar3 = ctk.CTkRadioButton(
-            self.window, text="Avatar3", variable=self.avatar_var, value="avatar3"
+            self.window, text="Avatar3", variable=self.avatar_var, value="C:\\Users\\Breixo\\manual-git\\sprint4tkinter\\assets\\avatar3.png"
         )
         avatar3.pack(pady=5)
 
