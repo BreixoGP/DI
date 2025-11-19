@@ -5,7 +5,7 @@ class GestorUsuarios:
 
     def __init__(self,):
         self._usuarios = []  # Lista interna donde guardamos objetos Usuario
-        self._cargar_datos_de_ejemplo()  # Cargamos usuarios de prueba
+        #self._cargar_datos_de_ejemplo()  # Cargamos usuarios de prueba
 
     def _cargar_datos_de_ejemplo(self):
         """Método privado que carga 2–3 usuarios de ejemplo."""

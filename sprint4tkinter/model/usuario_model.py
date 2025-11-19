@@ -11,19 +11,56 @@ class Usuario:
     def __str__(self):
         return f"Usuario({self.nombre}, {self.edad} años, {self.genero})"
 
-    def guardar_csv(self,ruta_archivo=None):#con none se guarda en la carpeta del proyecto
-            """
-            Guarda una lista de objetos Usuario en un archivo CSV.
-            usuarios: lista de objetos Usuario
-            ruta_archivo: path del CSV donde se guardarán los datos
-            """
-            # Abrimos el archivo en modo escritura
-            with open(ruta_archivo, "w", newline="", encoding="utf-8") as archivo:
-                escritor = csv.writer(archivo)
 
-                # Escribimos la cabecera
-                escritor.writerow(["nombre", "edad", "genero", "avatar"])
+class GestorUsuarios:
 
-                # Escribimos los datos de cada usuario
-                for usuario in usuarios:
-                    escritor.writerow([usuario.nombre, usuario.edad, usuario.genero, usuario.avatar])
+    def __init__(self,):
+        self._usuarios = []  # Lista interna donde guardamos objetos Usuario
+        #self._cargar_datos_de_ejemplo()  # Cargamos usuarios de prueba
+
+    def _cargar_datos_de_ejemplo(self):
+        """Método privado que carga 2–3 usuarios de ejemplo."""
+        u1 = Usuario("Ana", 28, "F")
+        u2 = Usuario("Carlos", 35, "M")
+        u3 = Usuario("Lucía", 22, "F")
+
+        self._usuarios.extend([u1, u2, u3])
+
+    def listar(self):
+        return self._usuarios
+
+    def agregar(self, usuario: Usuario):
+        self._usuarios.append(usuario)
+
+    def guardar_csv(self, ruta="usuarios.csv"):
+        """Guarda la lista de usuarios en un archivo CSV."""
+        with open(ruta, "w", newline="", encoding="utf-8") as archivo:
+            escritor = csv.writer(archivo)
+            # Cabecera
+            escritor.writerow(["nombre", "edad", "genero", "avatar"])
+
+            # Datos
+            for u in self._usuarios:
+                escritor.writerow([u.nombre, u.edad, u.genero, u.avatar])
+
+    def cargar_csv(self, ruta="usuarios.csv"):
+        """Carga usuarios desde un CSV. Limpia la lista antes."""
+        self._usuarios.clear()
+
+        try:
+            with open(ruta, "r", encoding="utf-8") as archivo:
+                lector = csv.reader(archivo)
+
+                # Saltar cabecera
+                next(lector)
+
+                for fila in lector:
+                    try:
+                        nombre, edad, genero, avatar = fila
+                        usuario = Usuario(nombre, int(edad), genero, avatar)
+                        self._usuarios.append(usuario)
+                    except Exception as e:
+                        print(f"Línea corrupta ignorada: {fila} -> {e}")
+
+        except FileNotFoundError:
+            print("Archivo CSV no encontrado. Se iniciará con la lista vacía.")
