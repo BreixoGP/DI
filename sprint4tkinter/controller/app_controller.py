@@ -14,6 +14,7 @@ class AppController:
         self.view = MainView(root)
         self.refrescar_lista_usuarios()
         self.view.boton_añadir_usuario.configure(command=self.abrir_ventana_añadir)
+        self.view.boton_salir.configure(command=root.destroy)
         self.BASE_DIR = Path(__file__).resolve().parent.parent
         self.ASSETS_PATH = self.BASE_DIR / "assets"
     def refrescar_lista_usuarios(self):
@@ -26,7 +27,7 @@ class AppController:
     def abrir_ventana_añadir(self):
         # Snippet para controller/app_controller.py en abrir_ventana_añadir
         add_view = AddUserView(self.root)
-        # Le decimos al botón "Guardar": "Cuando te pulsen, llama a 'añadir_usuario'
+        # Le decimos al botón "Guardar": "Cuando te pulsen, llama a funcion 'añadir_usuario'
         # del controlador y pásale una referencia a ti misma (add_view)".
         add_view.guardar_button.configure(command=lambda: self.añadir_usuario(add_view))
     def añadir_usuario(self, add_view):

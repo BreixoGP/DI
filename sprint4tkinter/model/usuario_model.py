@@ -10,3 +10,5 @@ class Usuario:
 
     def __str__(self):
         return f"Usuario({self.nombre}, {self.edad} años, {self.genero})"
+
+    #def guardar_csv(self):
