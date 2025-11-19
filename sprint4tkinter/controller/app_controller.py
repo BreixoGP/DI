@@ -20,7 +20,7 @@ class AppController:
         self.BASE_DIR = Path(__file__).resolve().parent.parent
         self.ASSETS_PATH = self.BASE_DIR / "assets"
 
-        self.cargar_usuarios()
+
         self.refrescar_lista_usuarios()
 
     def refrescar_lista_usuarios(self):
@@ -37,7 +37,7 @@ class AppController:
         # Le decimos al botón "Guardar": "Cuando te pulsen, llama a funcion 'añadir_usuario'
         # del controlador y pásale una referencia a ti misma (add_view)".
         add_view.guardar_button.configure(command=lambda: self.añadir_usuario(add_view))
-
+        add_view.cancelar_button.configure(command=add_view.window.destroy)
     def añadir_usuario(self, add_view):
         datos=add_view.get_data()
         #validar edad
