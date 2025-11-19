@@ -1,3 +1,5 @@
+import csv
+
 class Usuario:
     def __init__(self, nombre: str, edad: int, genero: str, avatar: str = None):
 
