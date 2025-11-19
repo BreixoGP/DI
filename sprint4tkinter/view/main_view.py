@@ -64,7 +64,7 @@ class AddUserView:
         self.nombre_entry = ctk.CTkEntry(self.window)
         self.nombre_entry.pack(pady=10, padx=10)
         self.guardar_button = ctk.CTkButton(self.window, text="Guardar")
-        self.guardar_button.pack(pady=10, padx=10)
+        self.guardar_button.pack(pady=10)
     def get_data(self):
         """Recoge los valores del formulario y los devuelve en un diccionario"""
         datos = {
