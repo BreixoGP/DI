@@ -1,5 +1,6 @@
 import customtkinter as ctk
-
+from PIL import Image
+from customtkinter import CTkImage
 
 class MainView(ctk.CTkFrame):
 
@@ -23,7 +24,9 @@ class MainView(ctk.CTkFrame):
         # detalle usuario
         self.frame = ctk.CTkFrame(self)
         self.frame.grid(row=0, column=1, sticky="nsew", padx=10, pady=10)
-
+        #avatar
+        self.label_avatar = ctk.CTkLabel(self.frame, text="Avatar: Ninguno")
+        self.label_avatar.pack(anchor="w", pady=5)
         # labels
         self.label_nombre = ctk.CTkLabel(self.frame, text="Nombre: ")
         self.label_nombre.pack(anchor="w", pady=5)
@@ -34,8 +37,7 @@ class MainView(ctk.CTkFrame):
         self.label_genero = ctk.CTkLabel(self.frame, text="Género: ")
         self.label_genero.pack(anchor="w", pady=5)
 
-        self.label_avatar = ctk.CTkLabel(self.frame, text="Avatar: ")
-        self.label_avatar.pack(anchor="w", pady=5)
+
 
         # botones abajo
         self.boton_añadir_usuario = ctk.CTkButton(self, text="Añadir Usuario",)
@@ -61,7 +63,17 @@ class MainView(ctk.CTkFrame):
         self.label_nombre.configure(text=f"Nombre: {usuario.nombre}")
         self.label_edad.configure(text=f"Edad: {usuario.edad}")
         self.label_genero.configure(text=f"Género: {usuario.genero}")
-        self.label_avatar.configure(text=f"Avatar: {usuario.avatar}")
+        if usuario.avatar and usuario.avatar != "ninguno":
+            try:
+                image = CTkImage(Image.open(usuario.avatar), size=(100, 100))  # Ajusta tamaño
+                self.label_avatar.configure(image=image, text="")  # Quitamos el texto
+                self.label_avatar.image = image  # Guardar referencia para que no se pierda
+            except Exception as e:
+                # Si hay error al cargar la imagen
+                self.label_avatar.configure(text="Avatar no disponible", image=None)
+        else:
+            blank= CTkImage(Image.open("C:\\Users\\Breixo\manual-git\\sprint4tkinter\\assets\\blankimage.png"), size=(100, 100))
+            self.label_avatar.configure(text="", image=blank)
 
 
 class AddUserView:
